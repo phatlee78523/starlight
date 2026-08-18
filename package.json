@@ -1,0 +1,29 @@
+{
+  "name": "starlight",
+  "version": "1.0.0",
+  "description": "",
+  "main": "backend/server.js",
+  "scripts": {
+    "start": "node backend/server.js",
+    "seed": "node backend/seed.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "engines": {
+    "node": "22.x"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@tidbcloud/serverless": "^0.3.0",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "exceljs": "^4.4.0",
+    "express": "^5.2.1",
+    "googleapis": "^175.0.0",
+    "multer": "^2.2.0",
+    "mysql2": "^3.23.3",
+    "node-cron": "^4.6.0"
+  }
+}

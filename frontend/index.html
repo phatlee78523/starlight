@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<base target="_top">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Starlight Marketing — Quản lý công việc</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+
+<!-- ==================== ĐĂNG NHẬP ==================== -->
+<div id="login">
+  <div class="login-box">
+    <div class="logo-wrap"><img class="lg-logo" src="data:image/png;base64,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" alt="Starlight Entertainment Center"></div>
+    <div class="sub">Truyền thông &amp; Marketing</div>
+
+    <div class="field">
+      <label>Nhập tên của bạn</label>
+      <input id="lgName" placeholder="Ví dụ: Phạm Nhật Đan" autocomplete="off">
+    </div>
+    <div class="field">
+      <label>Mật khẩu</label>
+      <input type="password" id="lgPass" placeholder="Nhập mật khẩu..." autocomplete="off" onkeypress="if(event.key==='Enter') doLogin()">
+    </div>
+    <button class="btn btn-gold btn-block" onclick="doLogin()">Đăng nhập</button>
+
+    <div class="divider"></div>
+    <div class="hint" style="text-align:left;margin-bottom:8px">Hoặc chọn nhanh:</div>
+    <div class="quick" id="quickList"></div>
+  </div>
+</div>
+
+<!-- ==================== APP ==================== -->
+<div id="app">
+  <header>
+    <div class="brand" id="brandBox" title="" style="cursor:pointer" onclick="go('today')"><img class="br-logo" src="data:image/png;base64,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" alt="Starlight"><span>Website vận hành cho bộ phận Truyền Thông &amp; Marketing</span></div>
+    <div class="spacer"></div>
+    <button class="sdbtn" onclick="showNowShowing(true)" title="Xem lịch phim đang chiếu / sắp chiếu">🎬</button>
+    <button class="sdbtn" onclick="toggleSide()" title="Ẩn/hiện cột Ai đang làm gì">👥</button>
+    <button class="snd" id="sndBtn" onclick="toggleSnd()" title="Âm thanh thông báo: ĐANG BẬT">🔊</button>
+    <button class="bell" onclick="goNotif()" title="Thông báo">🔔<span class="bell-dot" id="bellDot">0</span></button>
+    <div class="me">
+      <div class="av" id="meAv">?</div>
+      <div>
+        <div class="me-name" id="meName"></div>
+        <div class="me-pos" id="mePos"></div>
+      </div>
+      <button class="btn btn-line btn-sm" onclick="logout()" title="Đăng xuất">Thoát</button>
+    </div>
+  </header>
+
+  <div class="shell">
+  <nav id="nav"></nav>
+
+  <main>
+    <!-- ---------- HÔM NAY ---------- -->
+    <div class="page" id="p-today">
+      <div class="card daybar">
+        <div class="daybar-l">
+          <div class="dnum" id="tDayNum">–</div>
+          <div>
+            <div class="dtop" id="tDayTop">—</div>
+            <div class="hint" id="tGreet"></div>
+          </div>
+        </div>
+        <div class="spacer"></div>
+        <div class="ring" id="tRing"></div>
+        <div class="daybar-r">
+          <input type="date" id="tDate" style="width:auto" onchange="loadDay()">
+          <div class="row" style="gap:6px;margin-top:8px;justify-content:flex-end">
+            <button class="btn btn-line btn-sm" onclick="shiftDay(-1)" title="Hôm trước">◀</button>
+            <button class="btn btn-line btn-sm" onclick="goToday()">Hôm nay</button>
+            <button class="btn btn-line btn-sm" onclick="shiftDay(1)" title="Hôm sau">▶</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="leavebar" id="leaveBar" style="margin:-6px 0 16px"></div>
+      <div id="leaveBanner"></div>
+      <div class="grid g4" id="dayStats" style="margin-bottom:16px"></div>
+
+      <div class="card focus-card">
+        <div class="card-h">
+          <div class="card-t"><span class="ico">◎</span>Daily focus — trọng tâm hôm nay của bạn</div>
+          <div class="spacer"></div>
+          <span class="hint">Tự lưu khi bấm ra ngoài · sẽ nằm trong cột Daily focus của file Memo</span>
+        </div>
+        <textarea id="tFocus" rows="2"
+          placeholder="VD: Duyệt trailer sáng, chốt POSM Quy Nhơn, check ads U22..." onblur="saveFocus()"></textarea>
+      </div>
+
+      <div class="card addbar">
+        <div class="row">
+          <div class="field" style="flex:3">
+            <label>➕ Thêm công việc mới</label>
+            <input id="nTask" placeholder="Nhập nội dung công việc rồi bấm Enter..."
+                   onkeydown="if(event.key==='Enter')addTask()">
+          </div>
+          <div class="field" style="flex:1.2"><label>Nhóm</label><select id="nCat"></select></div>
+          <div class="field" style="flex:.9"><label>Ưu tiên</label><select id="nPri"></select></div>
+          <button class="btn btn-gold" onclick="addTask()">+ Thêm</button>
+        </div>
+        <div class="row" style="margin-top:11px">
+          <button class="btn btn-line btn-sm" onclick="openBulk()">📋 Dán nhiều dòng cùng lúc</button>
+          <button class="btn btn-line btn-sm" onclick="carryOver()">↩ Lấy việc chưa xong của hôm trước</button>
+          <div class="spacer"></div>
+          <span class="hint">Bấm ô vuông bên trái mỗi việc để đổi trạng thái: Chưa làm → Đang làm → Hoàn thành</span>
+        </div>
+      </div>
+
+      <div id="taskList"></div>
+    </div>
+
+    <!-- ---------- TUẦN ---------- -->
+    <div class="page" id="p-week">
+      <div class="card">
+        <div class="card-h">
+          <div class="card-t"><span class="ico">▸</span>Memo tuần — toàn bộ phận</div>
+          <div class="spacer"></div>
+          <input type="date" id="wDate" style="width:auto" onchange="loadWeek()">
+          <button class="btn btn-line btn-sm" onclick="shiftWeek(-7)">◀ Tuần trước</button>
+          <button class="btn btn-line btn-sm" onclick="shiftWeek(7)">Tuần sau ▶</button>
+        </div>
+        <div class="hint" style="margin-bottom:12px">Layout giống file <b>Memo Marketing Starlight</b> — đây chính là dữ liệu sẽ được xuất ra Excel cuối tháng.</div>
+
+        <div class="grid g2" style="margin-bottom:14px">
+          <div class="field" style="margin-bottom:0">
+            <label>MONTHLY FOCUS — <span id="wfLabel"></span></label>
+            <textarea id="wMonthly" rows="7" placeholder="Cinetour:...&#10;CTKM:...&#10;&#10;CÔNG VIỆC TUẦN&#10;Fanpage&#10;- ...&#10;Thiết kế&#10;- ...&#10;Ads; Ngân sách tháng:&#10;- ..."></textarea>
+          </div>
+          <div class="field" style="margin-bottom:0">
+            <label>WEEKLY FOCUS — trọng tâm tuần</label>
+            <textarea id="wWeekly" rows="7" placeholder="TRỌNG TÂM TUẦN:&#10;&#10;CTKM:&#10;- ...&#10;Fanpage:&#10;- ...&#10;Thiết kế:&#10;- ..."></textarea>
+          </div>
+        </div>
+        <div class="row" style="margin-bottom:16px">
+          <span class="hint">2 khối này sẽ nằm ở đầu mỗi sheet tuần trong file Excel xuất ra.</span>
+          <div class="spacer"></div>
+          <button class="btn btn-gold btn-sm" id="btnWFocus" onclick="saveWFocus()">💾 Lưu focus tuần</button>
+        </div>
+
+        <div class="legend" id="weekLegend"></div>
+        <div class="wrap-x"><table id="weekTable"></table></div>
+      </div>
+    </div>
+
+    <!-- ---------- POSM ---------- -->
+    <div class="page" id="p-posm">
+      <div class="card">
+        <div class="card-h">
+          <div class="card-t"><span class="ico">▸</span>Checklist POSM 6 cụm rạp</div>
+          <div class="spacer"></div>
+          <button class="btn btn-line btn-sm" onclick="loadPosm(true)">⟳ Tải lại từ Google Sheets</button>
+          <a class="btn btn-line btn-sm" id="posmLink" href="#" target="_blank">Mở file gốc ↗</a>
+        </div>
+        <div class="note">
+          <b>Đồng bộ 2 chiều:</b> mọi thay đổi ở đây ghi thẳng vào Google Sheets mà các rạp đang dùng, và ngược lại —
+          rạp cập nhật thì bấm <b>Tải lại</b> là thấy ngay. Cột <b>Trạng thái</b> = cột H, <b>Ghi chú đề xuất</b> = cột I trong file.
+        </div>
+        <div class="grid g4" id="posmStats" style="margin-bottom:16px"></div>
+        <div class="cin-tabs" id="cinTabs"></div>
+        <div id="posmScroll"><table id="posmTable"></table></div>
+        <div class="savebar">
+          <span class="hint" id="dirtyInfo">Chưa có thay đổi</span>
+          <div class="spacer"></div>
+          <button class="btn btn-line btn-sm" onclick="openAddPosm()">+ Thêm hạng mục</button>
+          <button class="btn btn-gold" id="btnSavePosm" onclick="savePosm()" disabled>💾 Lưu &amp; đồng bộ</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ---------- NHÂN SỰ ---------- -->
+    <div class="page" id="p-users">
+      <div class="card">
+        <div class="card-h">
+          <div class="card-t"><span class="ico">▸</span>Quản lý nhân sự</div>
+          <div class="spacer"></div>
+          <button class="btn btn-gold btn-sm" onclick="openAddUser()">+ Thêm nhân sự</button>
+        </div>
+        <div class="note">Xoá nhân sự = <b>ẩn khỏi hệ thống</b> nhưng vẫn giữ toàn bộ dữ liệu công việc cũ để báo cáo không bị mất. Có thể khôi phục lại bất cứ lúc nào.</div>
+        <div id="userList"></div>
+      </div>
+    </div>
+
+    <!-- ---------- BÁO CÁO ---------- -->
+    <div class="page" id="p-report">
+      <div class="card">
+        <div class="card-h"><div class="card-t"><span class="ico">▸</span>Xuất báo cáo Excel cuối tháng</div></div>
+        <div class="note">File xuất ra gồm: sheet <b>DASHBOARD</b> (biểu đồ + nhận xét &amp; đề xuất tự động) → các sheet <b>Tuần 1..N</b> đúng template
+          <b>Memo Marketing Starlight</b> (Date / Name / Daily focus / Plan / Finish) → sheet <b>PHÂN TÍCH KHỐI LƯỢNG</b>.
+          Tháng đã chốt sổ vẫn xuất lại được bình thường.</div>
+        <div class="row" style="margin-bottom:16px">
+          <div class="field" style="max-width:200px">
+            <label>Chọn tháng</label>
+            <input type="month" id="rMonth">
+          </div>
+          <button class="btn btn-gold" onclick="exportMonth()">📊 Xuất file Excel</button>
+        </div>
+        <div id="exportResult"></div>
+        <div class="divider"></div>
+        <div class="card-t" style="font-size:14px;margin-bottom:12px">Thống kê nhanh tháng đang chọn</div>
+        <div id="monthStats"></div>
+        <div class="divider"></div>
+        <div class="card-h"><div class="card-t" style="font-size:14px">Báo cáo đã xuất</div>
+          <div class="spacer"></div>
+          <button class="btn btn-line btn-sm" onclick="loadReports()">⟳ Làm mới</button>
+        </div>
+        <div id="reportList"></div>
+      </div>
+    </div>
+    <!-- ---------- DASHBOARD ---------- -->
+    <div class="page" id="p-dash">
+      <div class="card">
+        <div class="card-h">
+          <div class="card-t"><span class="ico">▸</span>Dashboard tổng hợp</div>
+          <div class="spacer"></div>
+          <select id="dMonth" style="width:auto" onchange="loadDash()"></select>
+          <select id="dUser" style="width:auto" onchange="loadDash()"></select>
+          <button class="btn btn-line btn-sm" onclick="loadDash(true)">⟳ Làm mới</button>
+        </div>
+        <div id="dashHero"></div>
+        <div class="grid g4" id="dashKpi" style="margin-top:14px"></div>
+      </div>
+
+      <div class="grid g2">
+        <div class="chartbox">
+          <div class="ch-h"><div class="ch-t">Khối lượng công việc theo ngày</div>
+            <div class="ch-s">việc tạo mới vs việc hoàn thành</div></div>
+          <div class="ch-body" id="chDaily"></div>
+          <div class="ch-leg" id="lgDaily"></div>
+        </div>
+        <div class="chartbox">
+          <div class="ch-h"><div class="ch-t">Khối lượng theo nhân sự</div>
+            <div class="ch-s">phần đậm = đã hoàn thành</div></div>
+          <div class="ch-body" id="chUser"></div>
+          <div class="ch-leg" id="lgUser"></div>
+        </div>
+      </div>
+
+      <div class="grid g2" style="margin-top:14px">
+        <div class="chartbox">
+          <div class="ch-h"><div class="ch-t">Tỉ lệ trạng thái công việc</div></div>
+          <div class="ch-body" id="chStatus"></div>
+          <div class="ch-leg" id="lgStatus"></div>
+        </div>
+        <div class="chartbox">
+          <div class="ch-h"><div class="ch-t">Khối lượng theo nhóm công việc</div>
+            <div class="ch-s">nhóm nào đang ngốn nhiều nguồn lực nhất</div></div>
+          <div class="ch-body" id="chCat"></div>
+        </div>
+      </div>
+
+      <div class="grid g2" style="margin-top:14px">
+        <div class="chartbox">
+          <div class="ch-h"><div class="ch-t">Khối lượng theo tuần</div>
+            <div class="ch-s">so sánh các tuần trong tháng</div></div>
+          <div class="ch-body" id="chWeek"></div>
+        </div>
+      </div>
+
+      <div class="grid g2" style="margin-top:16px">
+        <div class="card" style="margin:0">
+          <div class="card-h"><div class="card-t"><span class="ico">📌</span>Sắp tới — CTKM &amp; trang trí</div>
+            <div class="spacer"></div><div class="hint">45 ngày tới</div></div>
+          <div id="upList"></div>
+        </div>
+        <div class="card" style="margin:0">
+          <div class="card-h"><div class="card-t"><span class="ico">🎄</span>Timeline trang trí ngày lễ</div>
+            <div class="spacer"></div><div class="hint">tự điền hàng năm</div></div>
+          <div class="wrap-x"><table class="data" id="holiTable"></table></div>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:16px">
+        <div class="card-h"><div class="card-t"><span class="ico">▸</span>Nhận xét &amp; đề xuất tự động</div>
+          <div class="spacer"></div><div class="hint">Hệ thống tự phân tích từ dữ liệu tháng</div></div>
+        <div class="insights" id="dashInsights"></div>
+      </div>
+
+      <div class="card">
+        <div class="card-h"><div class="card-t"><span class="ico">▸</span>Bảng số liệu chi tiết</div>
+          <div class="spacer"></div>
+          <button class="btn btn-line btn-sm" onclick="toggleTbl('tvDash')">Ẩn / hiện bảng</button></div>
+        <div class="tblview on" id="tvDash"></div>
+      </div>
+    </div>
+
+    <!-- ---------- GIAO VIỆC ---------- -->
+    <div class="page" id="p-assign">
+      <div class="card">
+        <div class="card-h"><div class="card-t"><span class="ico">▸</span>Giao việc mới</div></div>
+        <div class="row">
+          <div class="field" style="flex:3">
+            <label>Nội dung công việc</label>
+            <input id="agTask" placeholder="VD: Thiết kế standee suất chiếu đặc biệt Quy Nhơn"
+                   onkeydown="if(event.key==='Enter')sendAssign()">
+          </div>
+          <div class="field" style="flex:1.3">
+            <label>Giao cho</label>
+            <select id="agTo"></select>
+          </div>
+          <div class="field" style="flex:1">
+            <label>Ngày làm</label>
+            <input type="date" id="agDate">
+          </div>
+        </div>
+        <div class="row" style="margin-top:10px">
+          <div class="field" style="flex:1.2"><label>Nhóm</label><select id="agCat"></select></div>
+          <div class="field" style="flex:.9"><label>Ưu tiên</label><select id="agPri"></select></div>
+          <div class="field" style="flex:2"><label>Ghi chú (không bắt buộc)</label>
+            <input id="agNote" placeholder="Deadline, yêu cầu cụ thể..."></div>
+          <button class="btn btn-gold" onclick="sendAssign()">📨 Giao việc</button>
+        </div>
+        <div class="hint" style="margin-top:10px">Người được giao sẽ nhận thông báo và chọn <b>Chấp nhận</b>
+          (việc tự vào tasklist ngày đó) hoặc <b>Kiến nghị</b> (gửi lại ý kiến cho người giao).</div>
+      </div>
+
+      <div class="grid g2">
+        <div class="card">
+          <div class="card-h"><div class="card-t"><span class="ico">▸</span>Việc giao cho tôi</div>
+            <div class="spacer"></div><span class="badge" id="agInCount">0</span></div>
+          <div id="agIn"></div>
+        </div>
+        <div class="card">
+          <div class="card-h"><div class="card-t"><span class="ico">▸</span>Việc tôi đã giao</div>
+            <div class="spacer"></div><button class="btn btn-line btn-sm" onclick="loadAssign()">⟳ Tải lại</button></div>
+          <div id="agOut"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ---------- THÔNG BÁO ---------- -->
+    <div class="page" id="p-notif">
+      <div class="card">
+        <div class="card-h">
+          <div class="card-t"><span class="ico">▸</span>Thông báo của bạn</div>
+          <div class="spacer"></div>
+          <button class="btn btn-line btn-sm" onclick="loadNotif(true)">⟳ Tải lại</button>
+          <button class="btn btn-line btn-sm" onclick="readAllNotif()">✓ Đánh dấu đã đọc tất cả</button>
+          <button class="btn btn-bad btn-sm" onclick="clearNotif()">🗑 Xoá tất cả</button>
+        </div>
+        <div class="nflist" id="nfList"></div>
+      </div>
+    </div>
+
+    <!-- ---------- PHIM ĐANG CHIẾU / SẮP CHIẾU ---------- -->
+    <div class="page" id="p-movie">
+      <div class="card">
+        <div class="card-h">
+          <div class="card-t"><span class="ico">▸</span>Phim đang chiếu &amp; sắp chiếu</div>
+          <div class="spacer"></div>
+          <span class="hint" id="mvMeta"></span>
+          <button class="btn btn-line btn-sm" onclick="loadMovies(true)">⟳ Tải lại</button>
+          <button class="btn btn-gold btn-sm" id="mvAdd" onclick="openMovie('')">+ Thêm phim</button>
+        </div>
+        <div class="note">Chuyên viên Content cập nhật ở đây — <b>cả team thấy ngay</b> (web tự làm mới mỗi 45 giây)
+          và mọi người sẽ thấy popup lịch phim khi đăng nhập. Bấm nút <b>🎬</b> trên thanh trên cùng để mở lại popup bất cứ lúc nào.</div>
+        <div id="mvBody"></div>
+      </div>
+    </div>
+
+    <!-- ---------- QUY TRÌNH ---------- -->
+    <div class="page" id="p-proc">
+      <div class="card">
+        <div class="card-h">
+          <div class="card-t"><span class="ico">▸</span>Quy trình &amp; tài liệu vận hành</div>
+          <div class="spacer"></div>
+          <select id="procCat" style="width:auto" onchange="renderProc()"></select>
+          <button class="btn btn-line btn-sm" onclick="loadProc(true)">⟳ Tải lại</button>
+          <button class="btn btn-gold btn-sm" id="procAdd" onclick="openProc('')">+ Tải quy trình lên</button>
+        </div>
+        <div class="note">Bấm vào tên quy trình để <b>xem trực tiếp trên web</b>, hoặc bấm ⬇ để tải file PDF về máy.
+          Chỉ Admin mới tải lên / sửa / đánh dấu ban hành.</div>
+        <div id="procList"></div>
+      </div>
+    </div>
+
+    <!-- ---------- BÁO CÁO ---------- -->
+    <div class="page" id="p-rp">
+      <!-- danh sách của chuyên viên -->
+      <div class="card" id="rpMine">
+        <div class="card-h">
+          <div class="card-t"><span class="ico">▸</span>Báo cáo tháng của tôi</div>
+          <div class="spacer"></div>
+          <button class="btn btn-line btn-sm" onclick="loadMyReports(true)">⟳ Tải lại</button>
+          <button class="btn btn-gold btn-sm" onclick="newReport()">+ Tạo báo cáo mới</button>
+        </div>
+        <div id="rpNote"></div>
+        <div id="rpList"></div>
+      </div>
+
+      <!-- biểu mẫu điền báo cáo -->
+      <div class="card" id="rpForm" style="display:none">
+        <div class="card-h">
+          <div class="card-t"><span class="ico">📝</span><span id="rpFormTitle">Báo cáo tháng</span></div>
+          <div class="spacer"></div>
+          <button class="btn btn-line btn-sm" onclick="closeReport()">✕ Đóng</button>
+        </div>
+        <div class="row" style="margin-bottom:12px">
+          <div class="field" style="flex:1"><label>Tháng báo cáo</label>
+            <input type="month" id="rpMonth"></div>
+          <div class="field" style="flex:1"><label>Dữ liệu được lấy từ ngày</label>
+            <input type="date" id="rpFrom"></div>
+          <div class="field" style="flex:1"><label>đến ngày</label>
+            <input type="date" id="rpTo"></div>
+        </div>
+        <div class="note" id="rpRange"></div>
+        <div id="rpFields"></div>
+        <div class="divider"></div>
+        <div class="row">
+          <button class="btn btn-bad btn-sm" id="rpDel" onclick="delReport()">🗑 Xoá báo cáo</button>
+          <div class="spacer"></div>
+          <button class="btn btn-line" onclick="saveReport(false)">💾 Lưu nháp</button>
+          <button class="btn btn-gold" onclick="saveReport(true)">📨 Gửi cho trưởng bộ phận</button>
+        </div>
+      </div>
+
+      <!-- trưởng bộ phận nhận báo cáo -->
+      <div class="card" id="rpAdmin" style="display:none">
+        <div class="card-h">
+          <div class="card-t"><span class="ico">📥</span>Nhận báo cáo từ các vị trí</div>
+          <div class="spacer"></div>
+          <button class="btn btn-line btn-sm" onclick="loadAllReports(true)">⟳ Tải lại</button>
+        </div>
+        <div id="rpMissing"></div>
+        <div id="rpAll"></div>
+      </div>
+
+      <!-- xem chi tiết 1 báo cáo -->
+      <div class="card" id="rpView" style="display:none">
+        <div class="card-h">
+          <div class="card-t"><span class="ico">🔎</span><span id="rpViewTitle">Chi tiết báo cáo</span></div>
+          <div class="spacer"></div>
+          <button class="btn btn-line btn-sm" onclick="closeReportView()">✕ Đóng</button>
+        </div>
+        <div id="rpViewBody"></div>
+      </div>
+    </div>
+
+    <!-- ---------- QUẢN TRỊ 6 FANPAGE ---------- -->
+    <div class="page" id="p-fanpage">
+      <div class="card">
+        <div class="card-h">
+          <div class="card-t"><span class="ico">▸</span>Quản trị 6 fanpage Starlight</div>
+          <div class="spacer"></div>
+          <div class="seg" id="fpRange">
+            <button onclick="fpSetRange('week',this)">Tuần này</button>
+            <button class="on" onclick="fpSetRange('7d',this)">7 ngày</button>
+            <button onclick="fpSetRange('30d',this)">30 ngày</button>
+            <button onclick="fpSetRange('month',this)">Tháng này</button>
+          </div>
+          <select id="fpPage" style="width:auto" onchange="loadFp()"></select>
+          <button class="btn btn-line btn-sm" onclick="syncFp()" style="display:none">🔄 Đồng bộ từ Facebook</button>
+          <button class="btn btn-line btn-sm" onclick="openPages()">⚙️ Cấu hình fanpage</button>
+          <button class="btn btn-gold btn-sm" onclick="openPost('')">+ Thêm bài viết</button>
+        </div>
+        <div id="fpNote"></div>
+
+        <div class="card-t" style="font-size:13px;margin-bottom:9px">Trạng thái đăng bài hôm nay</div>
+        <div class="pgstat" id="fpToday" style="margin-bottom:16px"></div>
+
+        <div class="grid g4" id="fpKpi" style="margin-bottom:16px"></div>
+        <div id="fpChamp" style="margin-bottom:16px"></div>
+
+        <div class="grid g2" style="margin-bottom:16px">
+          <div class="chartbox">
+            <div class="ch-h"><div class="ch-t">Tương tác theo fanpage</div>
+              <div class="ch-s">tổng like + comment + share trong kỳ</div></div>
+            <div class="ch-body" id="chFpPage"></div>
+          </div>
+          <div class="chartbox">
+            <div class="ch-h"><div class="ch-t">Tương tác trung bình theo định dạng</div>
+              <div class="ch-s">định dạng nào đang ăn nhất</div></div>
+            <div class="ch-body" id="chFpType"></div>
+          </div>
+        </div>
+
+        <div class="chartbox" style="margin-bottom:16px">
+          <div class="ch-h"><div class="ch-t">Tương tác theo ngày</div>
+              <div class="ch-s">rê chuột vào từng ngày để xem số bài đã đăng</div></div>
+          <div class="ch-body" id="chFpDaily"></div>
+          <div class="ch-leg" id="lgFpDaily"></div>
+        </div>
+
+        <div class="grid g2" style="margin-bottom:16px">
+          <div class="card" style="margin:0">
+            <div class="card-h"><div class="card-t"><span class="ico">🏆</span>Top bài viết tương tác cao nhất</div></div>
+            <div class="plist" id="fpTop"></div>
+          </div>
+          <div class="card" style="margin:0">
+            <div class="card-h"><div class="card-t"><span class="ico">📉</span>Bài viết tương tác thấp — cần xem lại</div></div>
+            <div class="plist" id="fpWeak"></div>
+          </div>
+        </div>
+
+        <div class="card" style="margin:0 0 16px">
+          <div class="card-h"><div class="card-t"><span class="ico">▸</span>Nhận xét &amp; đề xuất tự động</div></div>
+          <div class="insights" id="fpInsights"></div>
+        </div>
+
+        <div class="card-h"><div class="card-t" style="font-size:13px">Toàn bộ bài viết trong kỳ</div></div>
+        <div class="wrap-x" style="max-height:56vh;overflow:auto"><table class="data" id="fpTable"></table></div>
+      </div>
+    </div>
+
+    <!-- ---------- QUẢNG CÁO STARLIGHT ---------- -->
+    <div class="page" id="p-ads">
+      <div class="card">
+        <div class="card-h">
+          <div class="card-t"><span class="ico">▸</span>Quảng cáo Starlight đang chạy</div>
+          <div class="spacer"></div>
+          <button class="btn btn-line btn-sm" onclick="syncAds()" style="display:none">🔄 Đồng bộ từ Meta</button>
+          <button class="btn btn-line btn-sm" onclick="openMeta()">⚙️ Kết nối Meta</button>
+          <button class="btn btn-gold btn-sm" onclick="openAd('')">+ Thêm quảng cáo</button>
+        </div>
+        <div id="rivalLinks"></div>
+        <div id="adNote"></div>
+        <div class="grid g4" id="adKpi" style="margin-bottom:14px"></div>
+        <div class="grid g2" style="margin-bottom:16px">
+          <div class="chartbox">
+            <div class="ch-h"><div class="ch-t">Tương tác theo quảng cáo</div>
+              <div class="ch-s">like · comment · share ghi nhận được</div></div>
+            <div class="ch-body" id="chAdEng"></div>
+          </div>
+          <div class="chartbox">
+            <div class="ch-h"><div class="ch-t">Trạng thái quảng cáo</div></div>
+            <div class="ch-body" id="chAdSt"></div>
+            <div class="ch-leg" id="lgAdSt"></div>
+          </div>
+        </div>
+        <div class="grid g3" id="adList"></div>
+      </div>
+    </div>
+
+    <!-- ---------- TRA CỨU THÁNG CŨ ---------- -->
+    <div class="page" id="p-archive">
+      <div class="card">
+        <div class="card-h">
+          <div class="card-t"><span class="ico">▸</span>Tra cứu dữ liệu các tháng đã qua</div>
+          <div class="spacer"></div>
+          <select id="arMonth" style="width:auto" onchange="loadArchive()"></select>
+          <button class="btn btn-line btn-sm" onclick="loadArchive()">🔍 Xem</button>
+        </div>
+        <div class="note">Đầu mỗi tháng hệ thống <b>tự động chốt sổ</b>: dữ liệu tháng cũ được chuyển vào kho lưu trữ,
+          bảng làm việc bắt đầu lại từ số 0. Toàn bộ dữ liệu cũ vẫn tra cứu được ở đây, không mất gì.</div>
+        <div id="arBody"></div>
+      </div>
+    </div>
+  </main>
+
+  <aside id="side">
+    <div class="sd-h"><div class="sd-t">👥 Ai đang làm gì</div><div class="spacer"></div>
+      <button class="iconbtn" onclick="pulse()" title="Làm mới">⟳</button></div>
+    <div class="sd-c" id="sideCount">—</div>
+    <div class="sd-box">
+      <div class="field" style="margin-bottom:8px">
+        <label>Báo cho cả team bạn đang làm gì</label>
+        <textarea id="myStatus" placeholder="VD: Đang qua rạp BMT chụp POSM, chiều mới về..."
+          onkeydown="if(event.key==='Enter'&&(event.ctrlKey||event.metaKey))postStatus()"></textarea>
+      </div>
+      <div class="row" style="gap:6px">
+        <button class="btn btn-gold btn-sm" onclick="postStatus()">📢 Báo cả team</button>
+        <button class="btn btn-line btn-sm" onclick="clearStatus()">Xoá</button>
+      </div>
+    </div>
+    <div id="sideList"></div>
+  </aside>
+  </div>
+</div>
+
+<!-- ==================== MODALS ==================== -->
+<div class="modal" id="mdBulk"><div class="modal-box">
+  <div class="modal-t">Dán nhiều dòng công việc</div>
+  <div class="hint" style="margin-bottom:10px">Mỗi dòng là 1 công việc. Dấu <code>-</code> hoặc <code>•</code> đầu dòng sẽ được tự bỏ.</div>
+  <div class="field"><label>Danh sách</label>
+    <textarea id="bkText" rows="10" placeholder="- Lịch chiếu phim&#10;- Update lịch chiếu&#10;- Tổng hợp POSM và lên kế hoạch thay thế"></textarea></div>
+  <div class="row">
+    <div class="field"><label>Nhóm</label><select id="bkCat"></select></div>
+    <div class="field"><label>Ưu tiên</label><select id="bkPri"></select></div>
+  </div>
+  <div class="divider"></div>
+  <div class="row"><div class="spacer"></div>
+    <button class="btn btn-line" onclick="closeModal('mdBulk')">Huỷ</button>
+    <button class="btn btn-gold" onclick="addBulk()">Thêm tất cả</button></div>
+</div></div>
+
+<div class="modal" id="mdEdit"><div class="modal-box">
+  <div class="modal-t">Sửa công việc</div>
+  <input type="hidden" id="edId">
+  <div class="field"><label>Nội dung</label><textarea id="edTask" rows="3"></textarea></div>
+  <div class="row">
+    <div class="field"><label>Nhóm</label><select id="edCat"></select></div>
+    <div class="field"><label>Ưu tiên</label><select id="edPri"></select></div>
+    <div class="field"><label>Trạng thái</label><select id="edSt"></select></div>
+  </div>
+  <div class="field" style="margin-top:12px"><label>Ghi chú</label><input id="edNote" placeholder="Ghi chú thêm..."></div>
+  <div class="divider"></div>
+  <div class="row"><div class="spacer"></div>
+    <button class="btn btn-line" onclick="closeModal('mdEdit')">Huỷ</button>
+    <button class="btn btn-gold" onclick="saveEdit()">Lưu</button></div>
+</div></div>
+
+<div class="modal" id="mdUser"><div class="modal-box">
+  <div class="modal-t" id="muTitle">Thêm nhân sự</div>
+  <input type="hidden" id="muId">
+  <div class="field"><label>Họ và tên *</label><input id="muName" placeholder="VD: Trần Thị Mai"></div>
+  <div class="field"><label>Tên gọi ngắn (hiện trên báo cáo)</label><input id="muShort" placeholder="VD: Mai"></div>
+  <div class="field"><label>Vị trí / chức danh</label><input id="muPos" placeholder="VD: Chuyên viên Content"></div>
+  <div class="field"><label>Mật khẩu</label><input type="password" id="muPass" placeholder="Bỏ trống để giữ nguyên (hoặc 123456 mặc định)"></div>
+  <div class="field"><label>Quyền</label><select id="muRole">
+    <option value="member">Nhân viên</option><option value="admin">Admin (quản lý toàn bộ)</option></select></div>
+  <div class="field"><label>Là nhân sự thiết kế?</label><select id="muDes">
+    <option value="no">Không</option><option value="yes">Có — được dùng tab POSM + tự thêm việc lịch chiếu mỗi ngày</option></select></div>
+  <div class="field"><label>Là chuyên viên Content / Fanpage?</label><select id="muCon">
+    <option value="no">Không</option><option value="yes">Có — được dùng tab Quảng cáo &amp; Radar đối thủ</option></select></div>
+  <div class="divider"></div>
+  <div class="row"><div class="spacer"></div>
+    <button class="btn btn-line" onclick="closeModal('mdUser')">Huỷ</button>
+    <button class="btn btn-gold" onclick="saveUser()">Lưu</button></div>
+</div></div>
+
+<div class="modal" id="mdPosmAdd"><div class="modal-box">
+  <div class="modal-t">Thêm hạng mục POSM</div>
+  <div class="hint" id="paCin" style="margin-bottom:12px"></div>
+  <div class="field"><label>Hạng mục *</label><input id="paItem" placeholder="VD: tấm trần quầy bắp"></div>
+  <div class="row">
+    <div class="field"><label>Kích thước (ngang x dọc)</label><input id="paSize" placeholder="180x140CM"></div>
+    <div class="field"><label>Số lượng</label><input id="paQty" placeholder="1"></div>
+  </div>
+  <div class="field" style="margin-top:12px"><label>Vị trí</label><input id="paLoc" placeholder="VD: trước quầy bắp"></div>
+  <div class="field"><label>Ghi chú</label><input id="paNote"></div>
+  <div class="field"><label>Trạng thái</label><select id="paSt"></select></div>
+  <div class="field"><label>Link ảnh (tuỳ chọn)</label><input id="paImg" placeholder="https://..."></div>
+  <div class="divider"></div>
+  <div class="row"><div class="spacer"></div>
+    <button class="btn btn-line" onclick="closeModal('mdPosmAdd')">Huỷ</button>
+    <button class="btn btn-gold" onclick="savePosmAdd()">Thêm vào file</button></div>
+</div></div>
+
+<div class="modal" id="mdImg"><div class="modal-box" style="max-width:820px;text-align:center">
+  <div class="modal-t" id="miTitle">Hình ảnh POSM</div>
+  <img id="miImg" style="max-width:100%;border-radius:10px;border:1px solid var(--line)">
+  <div class="divider"></div>
+  <button class="btn btn-line" onclick="closeModal('mdImg')">Đóng</button>
+</div></div>
+
+<!-- kiến nghị việc được giao -->
+<div class="modal" id="mdAsg">
+  <div class="modal-box">
+    <div class="modal-t">Kiến nghị về công việc được giao</div>
+    <div class="note" id="asgWhat"></div>
+    <div class="field">
+      <label>Ý kiến của bạn (người giao sẽ nhận được thông báo)</label>
+      <textarea id="asgMsg" rows="4" placeholder="VD: Ngày đó em đang chạy 3 file gấp cho Đà Nẵng, xin dời sang thứ 5 hoặc chia bớt cho bạn khác."></textarea>
+    </div>
+    <div class="row">
+      <div class="spacer"></div>
+      <button class="btn btn-line" onclick="closeModal('mdAsg')">Đóng</button>
+      <button class="btn btn-bad" onclick="doObject()">Gửi kiến nghị</button>
+    </div>
+  </div>
+</div>
+
+<!-- thêm / sửa quảng cáo Starlight -->
+<div class="modal" id="mdAd">
+  <div class="modal-box wide">
+    <div class="modal-t" id="adTitle">Thêm quảng cáo</div>
+    <div class="row">
+      <div class="field" style="flex:2"><label>Tên quảng cáo / chiến dịch</label>
+        <input id="adName" placeholder="VD: U22 - Combo bắp nước tháng 8"></div>
+      <div class="field" style="flex:1"><label>Nền tảng</label><select id="adPlat"></select></div>
+      <div class="field" style="flex:1"><label>Trạng thái</label><select id="adSt"></select></div>
+    </div>
+    <div class="row" style="margin-top:10px">
+      <div class="field" style="flex:1"><label>Ngày bắt đầu</label><input type="date" id="adStart"></div>
+      <div class="field" style="flex:1"><label>Ngày kết thúc</label><input type="date" id="adEnd"></div>
+      <div class="field" style="flex:1"><label>Ngân sách đã chi (VNĐ)</label><input id="adSpend" placeholder="0"></div>
+    </div>
+    <div class="row" style="margin-top:10px">
+      <div class="field" style="flex:1"><label>Reach</label><input id="adReach" placeholder="0"></div>
+      <div class="field" style="flex:1"><label>Impressions</label><input id="adImp" placeholder="0"></div>
+      <div class="field" style="flex:1"><label>Lượt xem video</label><input id="adView" placeholder="0"></div>
+    </div>
+    <div class="row" style="margin-top:10px">
+      <div class="field" style="flex:1"><label>Like</label><input id="adLike" placeholder="0"></div>
+      <div class="field" style="flex:1"><label>Comment</label><input id="adCmt" placeholder="0"></div>
+      <div class="field" style="flex:1"><label>Share</label><input id="adShare" placeholder="0"></div>
+    </div>
+    <div class="field" style="margin-top:10px"><label>Link quảng cáo / Ad ID trên Meta Ad Library</label>
+      <input id="adLink" placeholder="https://www.facebook.com/ads/library/?id=..."></div>
+    <div class="field"><label>Ghi chú</label><input id="adNoteTx" placeholder="Đối tượng, nhận xét hiệu quả..."></div>
+    <div class="row">
+      <button class="btn btn-bad btn-sm" id="adDel" onclick="delAd()">🗑 Xoá</button>
+      <div class="spacer"></div>
+      <button class="btn btn-line" onclick="closeModal('mdAd')">Đóng</button>
+      <button class="btn btn-gold" onclick="saveAd()">💾 Lưu</button>
+    </div>
+  </div>
+</div>
+
+<!-- kết nối Meta -->
+<div class="modal" id="mdMeta">
+  <div class="modal-box">
+    <div class="modal-t">Kết nối Meta để lấy số liệu tự động</div>
+    <div class="note warn">
+      Meta <b>chỉ cho phép lấy tự động số liệu quảng cáo của chính mình</b> (qua Marketing API).
+      Quảng cáo thương mại của đối thủ trên Ad Library thì Meta <b>không mở API công khai</b> ở Việt Nam —
+      phần đối thủ hệ thống dùng link tra cứu trực tiếp + ghi nhận thủ công (xem tab Radar đối thủ).
+    </div>
+    <div class="field"><label>Access Token (System User Token, quyền ads_read)</label>
+      <input id="mtToken" placeholder="EAAB..."></div>
+    <div class="field"><label>Ad Account ID (dạng act_1234567890 hoặc chỉ số)</label>
+      <input id="mtAct" placeholder="act_123456789"></div>
+    <div class="field"><label>Page ID fanpage Starlight (không bắt buộc — để lấy like/comment bài viết)</label>
+      <input id="mtPage" placeholder="1234567890"></div>
+    <div class="hint">Lấy token tại business.facebook.com → Cài đặt doanh nghiệp → Người dùng hệ thống → Tạo token.
+      Token được lưu trong Script Properties của chính project này, không ai khác đọc được.</div>
+    <div class="row" style="margin-top:14px">
+      <button class="btn btn-line btn-sm" onclick="testMeta()">🔌 Kiểm tra kết nối</button>
+      <div class="spacer"></div>
+      <button class="btn btn-line" onclick="closeModal('mdMeta')">Đóng</button>
+      <button class="btn btn-gold" onclick="saveMeta()">💾 Lưu</button>
+    </div>
+  </div>
+</div>
+
+<!-- ghi nhận quảng cáo đối thủ -->
+<div class="modal" id="mdRival">
+  <div class="modal-box wide">
+    <div class="modal-t" id="rvTitle">Ghi nhận quảng cáo đối thủ</div>
+    <div class="row">
+      <div class="field" style="flex:1"><label>Thương hiệu</label><select id="rvBrand"></select></div>
+      <div class="field" style="flex:1"><label>Định dạng</label><select id="rvFmt"></select></div>
+      <div class="field" style="flex:1"><label>Còn đang chạy?</label><select id="rvRun"></select></div>
+    </div>
+    <div class="field" style="margin-top:10px"><label>Nội dung / thông điệp quảng cáo</label>
+      <textarea id="rvText" rows="3" placeholder="VD: CGV - Combo 2 vé + bắp nước 199K cho suất chiếu trước 12h"></textarea></div>
+    <div class="row">
+      <div class="field" style="flex:1"><label>Ngày bắt đầu chạy (trên Ad Library)</label><input type="date" id="rvStart"></div>
+      <div class="field" style="flex:1"><label>Like</label><input id="rvLike" placeholder="0"></div>
+      <div class="field" style="flex:1"><label>Lượt xem</label><input id="rvView" placeholder="0"></div>
+    </div>
+    <div class="field" style="margin-top:10px"><label>Link Ad Library</label>
+      <input id="rvLink" placeholder="https://www.facebook.com/ads/library/?id=..."></div>
+    <div class="field"><label>Nhận xét / bài học cho Starlight</label>
+      <input id="rvIns" placeholder="VD: Họ đẩy mạnh combo giá thấp giờ vắng — mình nên phản ứng ở khung 10-12h"></div>
+    <div class="row">
+      <button class="btn btn-bad btn-sm" id="rvDel" onclick="delRival()">🗑 Xoá</button>
+      <div class="spacer"></div>
+      <button class="btn btn-line" onclick="closeModal('mdRival')">Đóng</button>
+      <button class="btn btn-gold" onclick="saveRival()">💾 Lưu</button>
+    </div>
+  </div>
+</div>
+
+<!-- thêm / sửa bài viết fanpage -->
+<div class="modal" id="mdPost">
+  <div class="modal-box wide">
+    <div class="modal-t" id="poTitle">Thêm bài viết</div>
+    <div class="row">
+      <div class="field" style="flex:1.4"><label>Fanpage</label><select id="poPage"></select></div>
+      <div class="field" style="flex:1"><label>Ngày đăng</label><input type="date" id="poDate"></div>
+      <div class="field" style="flex:1"><label>Định dạng</label><select id="poType"></select></div>
+    </div>
+    <div class="field" style="margin-top:10px"><label>Nội dung / tiêu đề bài viết</label>
+      <textarea id="poContent" rows="2" placeholder="VD: Lịch chiếu 17/8 — Cua Lộ Diện suất 19h30 tặng bắp"></textarea></div>
+    <div class="row">
+      <div class="field" style="flex:1"><label>Reach (người tiếp cận)</label><input id="poReach" placeholder="0"></div>
+      <div class="field" style="flex:1"><label>Like / cảm xúc</label><input id="poLike" placeholder="0"></div>
+      <div class="field" style="flex:1"><label>Comment</label><input id="poCmt" placeholder="0"></div>
+      <div class="field" style="flex:1"><label>Share</label><input id="poShare" placeholder="0"></div>
+    </div>
+    <div class="field" style="margin-top:10px"><label>Link bài viết</label>
+      <input id="poLink" placeholder="https://www.facebook.com/..."></div>
+    <div class="row">
+      <button class="btn btn-bad btn-sm" id="poDel" onclick="delPost()">🗑 Xoá</button>
+      <div class="spacer"></div>
+      <button class="btn btn-line" onclick="closeModal('mdPost')">Đóng</button>
+      <button class="btn btn-gold" onclick="savePost()">💾 Lưu</button>
+    </div>
+  </div>
+</div>
+
+<!-- cấu hình 6 fanpage -->
+<div class="modal" id="mdPages">
+  <div class="modal-box wide">
+    <div class="modal-t">Cấu hình fanpage</div>
+    <div class="note">Nhập <b>Page ID</b> của từng fanpage để hệ thống tự lấy bài viết + số liệu tương tác về.
+      Page ID xem tại fanpage → <b>Giới thiệu → Tính minh bạch của trang</b>, hoặc dùng
+      <a href="https://findmyfbid.com" target="_blank">findmyfbid.com</a>.
+      Token để trống thì hệ thống dùng chung token đã lưu ở tab Quảng cáo (cần quyền <b>pages_read_engagement</b>).</div>
+    <div id="pgList"></div>
+    <div class="divider"></div>
+    <div class="row">
+      <div class="spacer"></div>
+      <button class="btn btn-line" onclick="closeModal('mdPages')">Đóng</button>
+      <button class="btn btn-gold" onclick="savePages()">💾 Lưu tất cả</button>
+    </div>
+  </div>
+</div>
+
+<!-- popup lịch phim khi đăng nhập -->
+<div class="modal" id="mdNS">
+  <div class="modal-box wide">
+    <div class="modal-t">🎬 Lịch phim Starlight hôm nay</div>
+    <div id="nsBody"></div>
+    <div class="divider"></div>
+    <div class="row">
+      <button class="btn btn-line btn-sm" onclick="closeNS(true)">Không hiện lại hôm nay</button>
+      <div class="spacer"></div>
+      <button class="btn btn-line" onclick="closeNS(false);go('movie')">Xem chi tiết</button>
+      <button class="btn btn-gold" onclick="closeNS(false)">Đã xem</button>
+    </div>
+  </div>
+</div>
+
+<!-- thêm / sửa phim -->
+<div class="modal" id="mdMovie">
+  <div class="modal-box wide">
+    <div class="modal-t" id="mvTitle">Thêm phim</div>
+    <div class="poster-pick">
+      <div>
+        <div class="poster-prev" id="mvPrev"><div class="mv-np">🎬</div></div>
+        <div class="field" style="margin-top:9px">
+          <label>Poster</label>
+          <input type="file" id="mvFile" accept="image/*" onchange="pickPoster(this)">
+          <div class="hint">Ảnh sẽ tự nén và lưu vào Drive của bộ phận.</div>
+        </div>
+      </div>
+      <div style="flex:1;min-width:0">
+        <div class="row">
+          <div class="field" style="flex:2"><label>Tên phim *</label>
+            <input id="mvName" placeholder="VD: Mưa Đỏ"></div>
+          <div class="field" style="flex:1"><label>Trạng thái</label><select id="mvSt"></select></div>
+        </div>
+        <div class="row" style="margin-top:10px">
+          <div class="field" style="flex:1"><label>Ngày khởi chiếu</label><input type="date" id="mvRel"></div>
+          <div class="field" style="flex:1"><label>Dự kiến kết thúc</label><input type="date" id="mvEnd"></div>
+        </div>
+        <div class="row" style="margin-top:10px">
+          <div class="field" style="flex:1.4"><label>Thể loại</label><input id="mvGenre" placeholder="Hành động, Tâm lý..."></div>
+          <div class="field" style="flex:.8"><label>Thời lượng</label><input id="mvDur" placeholder="120 phút"></div>
+        </div>
+        <div class="row" style="margin-top:10px">
+          <div class="field" style="flex:1"><label>Định dạng</label><input id="mvFmt" placeholder="2D · Lồng tiếng"></div>
+          <div class="field" style="flex:1"><label>Kiểm duyệt</label><input id="mvRate" placeholder="T13 / T16 / T18 / K"></div>
+        </div>
+        <div class="field" style="margin-top:10px"><label>Ghi chú cho team</label>
+          <input id="mvNote" placeholder="VD: có suất chiếu sớm 20h thứ 5, ưu tiên đẩy fanpage"></div>
+      </div>
+    </div>
+    <div class="row" style="margin-top:12px">
+      <button class="btn btn-bad btn-sm" id="mvDel" onclick="delMovie()">🗑 Xoá</button>
+      <div class="spacer"></div>
+      <button class="btn btn-line" onclick="closeModal('mdMovie')">Đóng</button>
+      <button class="btn btn-gold" onclick="saveMovie()">💾 Lưu</button>
+    </div>
+  </div>
+</div>
+
+<!-- tải quy trình lên -->
+<div class="modal" id="mdProc">
+  <div class="modal-box wide">
+    <div class="modal-t" id="qtTitle">Tải quy trình lên</div>
+    <div class="row">
+      <div class="field" style="flex:2"><label>Tên quy trình *</label>
+        <input id="qtName" placeholder="VD: Quy trình triển khai trang trí ngày lễ"></div>
+      <div class="field" style="flex:1"><label>Mã số</label><input id="qtCode" placeholder="QT-MKT-01"></div>
+    </div>
+    <div class="row" style="margin-top:10px">
+      <div class="field" style="flex:1.3"><label>Nhóm</label><select id="qtCat"></select></div>
+      <div class="field" style="flex:.8"><label>Phiên bản</label><input id="qtVer" placeholder="1.0"></div>
+      <div class="field" style="flex:1"><label>Trạng thái</label><select id="qtSt"></select></div>
+      <div class="field" style="flex:1"><label>Ngày ban hành</label><input type="date" id="qtDate"></div>
+    </div>
+    <div class="field" style="margin-top:10px"><label>File PDF</label>
+      <input type="file" id="qtFile" accept="application/pdf" onchange="pickProcFile(this)">
+      <div class="hint" id="qtFileInfo">Chọn file PDF (tối đa ~10MB). File lưu trong thư mục Drive của bộ phận.</div>
+    </div>
+    <div class="field"><label>Ghi chú / phạm vi áp dụng</label>
+      <input id="qtNote" placeholder="VD: áp dụng cho 6 cụm rạp, thay thế bản 1.0"></div>
+    <div class="row" style="margin-top:12px">
+      <button class="btn btn-bad btn-sm" id="qtDel" onclick="delProc()">🗑 Xoá</button>
+      <div class="spacer"></div>
+      <button class="btn btn-line" onclick="closeModal('mdProc')">Đóng</button>
+      <button class="btn btn-gold" onclick="saveProc()">💾 Lưu</button>
+    </div>
+  </div>
+</div>
+
+<!-- xem PDF ngay trên web -->
+<div class="modal" id="mdPdf">
+  <div class="modal-box" style="max-width:1080px">
+    <div class="row" style="margin-bottom:10px">
+      <div class="modal-t" id="pdfTitle" style="margin:0">Quy trình</div>
+      <div class="spacer"></div>
+      <a class="btn btn-line btn-sm" id="pdfDown" href="#" target="_blank">⬇ Tải về</a>
+      <a class="btn btn-line btn-sm" id="pdfOpen" href="#" target="_blank">Mở tab mới ↗</a>
+      <button class="btn btn-gold btn-sm" onclick="closeModal('mdPdf')">Đóng</button>
+    </div>
+    <iframe id="pdfFrame" src="" style="width:100%;height:74vh;border:1px solid var(--line);border-radius:10px"></iframe>
+  </div>
+</div>
+
+<!-- popup nhắc báo cáo ngày 28 -->
+<div class="modal" id="mdRp28">
+  <div class="modal-box">
+    <div class="modal-t">📊 Hôm nay là ngày 28 — ngày báo cáo tháng</div>
+    <div id="rp28Body"></div>
+    <div class="row" style="margin-top:14px">
+      <div class="spacer"></div>
+      <button class="btn btn-line" onclick="closeModal('mdRp28')">Để sau</button>
+      <button class="btn btn-gold" onclick="closeModal('mdRp28');go('rp')">Vào tab Báo cáo</button>
+    </div>
+  </div>
+</div>
+
+<div id="load"><div class="spin"></div><div id="loadTxt" class="hint">Đang xử lý...</div></div>
+<div class="toast-wrap" id="toasts"></div>
+
+<script src="js/app.js"></script>
+
+
+</body>
+</html>
