@@ -4,6 +4,7 @@ const cors = require('cors');
 const path = require('path');
 const fs = require('fs');
 const apiRoutes = require('./routes/api');
+const migrate = require('./migrate');
 const db = require('../db');
 
 const app = express();
@@ -31,4 +32,6 @@ const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`Server is running on port ${PORT}`);
+  // Mở port trước rồi mới migrate — Render cần port lên sớm để health check
+  migrate().catch(e => console.error('[migrate] lỗi:', e.message));
 });

@@ -5,7 +5,7 @@ const apiController = require('../controllers/apiController');
 // Loại bỏ đệ quy mọi field nhạy cảm trước khi trả về client.
 // Nhiều query dùng SELECT * nên cột password lọt vào response;
 // chặn tập trung ở đây để không sót chỗ nào.
-const SECRET_FIELDS = ['password'];
+const SECRET_FIELDS = ['password', 'token'];
 
 function stripSecrets(value) {
   if (Array.isArray(value)) return value.map(stripSecrets);
