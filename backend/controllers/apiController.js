@@ -2,6 +2,7 @@ const pool = require('../../db');
 const path = require('path');
 const fs = require('fs');
 const ExcelJS = require('exceljs');
+const meta = require('../services/meta');
 
 const UPLOADS_DIR = path.join(__dirname, '../../frontend/uploads');
 
@@ -254,7 +255,7 @@ module.exports = {
       adStatuses: ['Đang chạy', 'Đã tắt', 'Tạm dừng', 'Chờ duyệt'],
       leaveTypes: ['Nghỉ phép cả ngày', 'Nghỉ buổi sáng', 'Nghỉ buổi chiều'],
       movieStatuses: MOVIE_STATUSES,
-      version: 'v6.2 (MySQL)', dayOfMonth: vnNow().getUTCDate(),
+      version: 'v6.3 (MySQL + Meta)', dayOfMonth: vnNow().getUTCDate(),
       movies: {
         movies: movies.map(movieOut), statuses: MOVIE_STATUSES,
         version: movieMeta.version, updatedAt: movieMeta.updatedAt, updatedBy: movieMeta.updatedBy
@@ -747,10 +748,63 @@ module.exports = {
     return { ok: true };
   },
   api_syncFanpages: async function () {
-    return { count: 0, message: 'Chưa kết nối Meta — bản này nhập số liệu tay, vẫn đầy đủ báo cáo.' };
+    const s = await getJson('META_SETTINGS', { token: '' });
+    if (!s.token) return { count: 0, message: 'Chưa có token — vào tab Quảng cáo Starlight → ⚙️ Kết nối Meta để dán token trước.' };
+
+    const [pages] = await pool.query('SELECT * FROM pages');
+    const withId = pages.filter(p => p.pageId);
+    if (!withId.length) return { count: 0, message: 'Chưa nhập Page ID cho fanpage nào — vào ⚙️ Cấu hình fanpage điền Page ID từng rạp.' };
+
+    let count = 0;
+    const errors = [];
+    for (const pg of withId) {
+      try {
+        // Ưu tiên token riêng của page (page access token đọc được insights)
+        const posts = await meta.fetchPagePosts(pg.pageId, pg.token || s.token, 50);
+        for (const po of posts) {
+          await pool.query(
+            `INSERT INTO posts (id, userId, fanpage, date, content, type, reach, likes, comments, shares, link)
+             VALUES (?,?,?,?,?,?,?,?,?,?,?)
+             ON DUPLICATE KEY UPDATE reach=VALUES(reach), likes=VALUES(likes), comments=VALUES(comments),
+               shares=VALUES(shares), content=VALUES(content), type=VALUES(type)`,
+            ['FB' + po.fbId.slice(-40), 'META', pg.name, po.date, po.content, po.type,
+              String(po.reach), String(po.likes), String(po.comments), String(po.shares), po.link]);
+          count++;
+        }
+      } catch (e) {
+        errors.push((pg.cinema || pg.name) + ': ' + e.message);
+      }
+    }
+    s.lastSync = fmtDateTime(new Date().toISOString());
+    await saveJson('META_SETTINGS', s);
+    const msg = count
+      ? `Đã đồng bộ ${count} bài viết từ ${withId.length - errors.length}/${withId.length} fanpage.` + (errors.length ? ' Lỗi: ' + errors[0] : '')
+      : (errors[0] || 'Không có bài viết mới.');
+    return { count, message: msg };
   },
   api_syncAdsFromMeta: async function () {
-    return { count: 0, message: 'Chưa kết nối Meta — bản này nhập số liệu tay, vẫn đầy đủ báo cáo.' };
+    const s = await getJson('META_SETTINGS', { token: '', actId: '' });
+    if (!s.token) return { count: 0, message: 'Chưa có token — bấm ⚙️ Kết nối Meta để dán token trước.' };
+    if (!s.actId) return { count: 0, message: 'Chưa nhập Ad Account ID (dạng act_123456789) trong ⚙️ Kết nối Meta.' };
+
+    try {
+      const ads = await meta.fetchAds(s.actId, s.token, 50);
+      for (const ad of ads) {
+        await pool.query(
+          `INSERT INTO ads (id, userId, name, platform, status, \`start\`, \`end\`, spend, reach, impressions, views, likes, comments, shares, link, note)
+           VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+           ON DUPLICATE KEY UPDATE status=VALUES(status), spend=VALUES(spend), reach=VALUES(reach),
+             impressions=VALUES(impressions), views=VALUES(views), likes=VALUES(likes),
+             comments=VALUES(comments), shares=VALUES(shares)`,
+          ['FB' + ad.fbId.slice(-40), 'META', ad.name, 'Facebook', ad.status, ad.start, '',
+            ad.spend, ad.reach, ad.impressions, ad.views, ad.likes, ad.comments, ad.shares, ad.link, 'Đồng bộ từ Meta']);
+      }
+      s.lastSync = fmtDateTime(new Date().toISOString());
+      await saveJson('META_SETTINGS', s);
+      return { count: ads.length, message: ads.length ? `Đã đồng bộ ${ads.length} quảng cáo từ Meta.` : 'Tài khoản quảng cáo chưa có ads nào.' };
+    } catch (e) {
+      return { count: 0, message: e.message };
+    }
   },
   api_getMetaSettings: async function () {
     const s = await getJson('META_SETTINGS', { token: '', actId: '', pageId: '' });
@@ -768,7 +822,14 @@ module.exports = {
     return { ok: true };
   },
   api_testMeta: async function () {
-    return { ok: false, message: 'Bản MySQL chưa gọi trực tiếp Meta API — số liệu nhập tay vẫn hoạt động đầy đủ.' };
+    const s = await getJson('META_SETTINGS', { token: '' });
+    if (!s.token) return { ok: false, message: 'Chưa có token — dán token vào ô đầu tiên rồi bấm Lưu trước.' };
+    try {
+      const me = await meta.testToken(s.token);
+      return { ok: true, message: `Kết nối Meta OK — token của "${me.name}" hoạt động bình thường.` };
+    } catch (e) {
+      return { ok: false, message: e.message };
+    }
   },
 
   api_pulse: async function (p) {
