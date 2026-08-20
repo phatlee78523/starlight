@@ -3,6 +3,7 @@ const path = require('path');
 const fs = require('fs');
 const ExcelJS = require('exceljs');
 const meta = require('../services/meta');
+const automation = require('../services/automation');
 
 const UPLOADS_DIR = path.join(__dirname, '../../frontend/uploads');
 
@@ -222,6 +223,9 @@ function saveBase64File(base64Data, prefix) {
 
 module.exports = {
   api_bootstrap: async function () {
+    // Chạy bù automation ngày mới khi người đầu tiên mở web (Render free hay ngủ, cron có thể lỡ)
+    try { await automation.runDaily(); } catch (e) { console.error('[automation]', e.message); }
+
     const [users] = await pool.query('SELECT * FROM users WHERE active = TRUE');
     const categories = ['Fanpage / Content', 'Thiết kế', 'Ads', 'TikTok', 'Biên tập', 'POSM', 'KOL / KOC', 'Sự kiện', 'Đề xuất / Giấy tờ', 'Báo cáo', 'Khác'];
 
@@ -255,7 +259,7 @@ module.exports = {
       adStatuses: ['Đang chạy', 'Đã tắt', 'Tạm dừng', 'Chờ duyệt'],
       leaveTypes: ['Nghỉ phép cả ngày', 'Nghỉ buổi sáng', 'Nghỉ buổi chiều'],
       movieStatuses: MOVIE_STATUSES,
-      version: 'v6.3 (MySQL + Meta)', dayOfMonth: vnNow().getUTCDate(),
+      version: 'v6.4 (MySQL + Meta + Auto)', dayOfMonth: vnNow().getUTCDate(),
       movies: {
         movies: movies.map(movieOut), statuses: MOVIE_STATUSES,
         version: movieMeta.version, updatedAt: movieMeta.updatedAt, updatedBy: movieMeta.updatedBy
@@ -1061,7 +1065,10 @@ module.exports = {
   },
 
   api_dashExtras: async function () {
-    return { upcoming: { items: [], today: vnToday() }, timeline: { items: [] } };
+    return {
+      upcoming: { items: automation.upcomingItems(45), today: vnToday() },
+      timeline: { items: automation.timelineItems() }
+    };
   },
   api_listUsers: async function () { const [users] = await pool.query('SELECT * FROM users'); return users.map(u => ({ ...u, active: !!u.active })); },
 

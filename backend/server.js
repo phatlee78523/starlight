@@ -3,8 +3,10 @@ const express = require('express');
 const cors = require('cors');
 const path = require('path');
 const fs = require('fs');
+const cron = require('node-cron');
 const apiRoutes = require('./routes/api');
 const migrate = require('./migrate');
+const automation = require('./services/automation');
 const db = require('../db');
 
 const app = express();
@@ -33,5 +35,13 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`Server is running on port ${PORT}`);
   // Mở port trước rồi mới migrate — Render cần port lên sớm để health check
-  migrate().catch(e => console.error('[migrate] lỗi:', e.message));
+  migrate()
+    .then(() => automation.runDaily())
+    .catch(e => console.error('[migrate] lỗi:', e.message));
 });
+
+// 6h sáng VN mỗi ngày: việc cố định, nhắc CTKM, timeline trang trí, nhắc báo cáo ngày 28.
+// (Có chạy bù trong api_bootstrap nếu server đang ngủ đúng 6h.)
+cron.schedule('0 6 * * *', () => {
+  automation.runDaily().catch(e => console.error('[automation]', e.message));
+}, { timezone: 'Asia/Ho_Chi_Minh' });
